@@ -1,0 +1,1820 @@
+entity Gaz001agenti {
+	idAgente Integer required,
+	idFornitore Integer required,
+	basePercent BigDecimal required,
+	tipoContratto Boolean required,
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001agentiForn {
+	idAgente Integer required,
+	idFornitore Integer required,
+	basePercent BigDecimal required,
+	tipoContratto Boolean required,
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001aliiva {
+	codice Integer required,
+	tipiva String required maxlength(1),
+	operationType String required maxlength(15),
+	aliquo BigDecimal,
+	taxstamp Integer required,
+	faeNatura String required maxlength(2),
+	descri String required maxlength(50),
+	status String maxlength(10),
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001artico {
+	codice String required maxlength(15),
+	descri String maxlength(255),
+	codiceFornitore String required maxlength(50),
+	/** per indicare la qualità del materiale , normativa, ecc */
+	quality String required maxlength(50),
+	ordinabile String required maxlength(1),
+	movimentabile String required maxlength(1),
+	goodOrService Integer,
+	lotOrSerial Integer required,
+	image Blob required,
+	barcode String required maxlength(64),
+	unimis String maxlength(3),
+	larghezza BigDecimal,
+	lunghezza BigDecimal,
+	spessore BigDecimal,
+	/** Resistenza es.momento flettente (Wx cm³), utilizzabile per calcoli di svariata natura comunque legati alla resistenza meccanica del materiale */
+	bendingMoment BigDecimal,
+	catmer Integer required,
+	ragstat String required maxlength(15),
+	preacq BigDecimal,
+	preve1 BigDecimal,
+	preve2 BigDecimal,
+	preve3 BigDecimal,
+	preve4 BigDecimal,
+	sconto BigDecimal,
+	webMu String required maxlength(15),
+	webPrice BigDecimal required,
+	webMultiplier BigDecimal required,
+	webPublic Boolean required,
+	depliPublic Boolean,
+	webUrl String required maxlength(255),
+	aliiva Integer,
+	retentionTax Boolean required,
+	lastCost BigDecimal,
+	payrollTax Boolean required,
+	scorta BigDecimal,
+	riordino BigDecimal,
+	uniacq String required maxlength(3),
+	/** Classificazione ambientale come da art.16  comma 2 del D.Lgs 150/2012 (Utilizzato in quaderno di campagna) */
+	classifAmb Boolean required,
+	/** Mostra nei movimenti del quaderno di campagna: 1=si , 0=no */
+	mostraQdc Boolean required,
+	pesoSpecifico BigDecimal,
+	volumeSpecifico BigDecimal required,
+	/** Utilizzato in quaderno di campagna */
+	doseMassima BigDecimal required,
+	/** Utilizzato in quaderno di campagna */
+	rameMetallico BigDecimal required,
+	/** Se un concime dev'essere valorizzato con la percentuale di azoto (N) */
+	percN BigDecimal,
+	/** Se un concime dev'essere valorizzato con la percentuale di fosforo (P) */
+	percP BigDecimal,
+	/** Se un concime dev'essere valorizzato con la percentuale di potassio (K) */
+	percK BigDecimal,
+	/** Utilizzato in quaderno di campagna */
+	tempoSospensione Integer required,
+	/** 0 non movimenta, 1 movimenta il SIAN come olio, 2 movimenta il SIAN come olive */
+	sian Integer required,
+	packUnits Boolean required,
+	codcon Integer required,
+	idCost Integer required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant,
+	clfoco String maxlength(15),
+	lastUsed LocalDate
+}
+
+entity Gaz001assets {
+	id Integer required,
+	/** può essere riferito a gaz_001tesmov in caso di acquisto bene o a gaz_001rigmoc in altri casi, ad esempio negli ammortamenti di fine anno */
+	idMovcon Integer required,
+	/** tipologia di movimento sul libro cespiti es.1=acquisto, 10 rivalutazione, 50 ammortamento, 90 alienazione */
+	typeMov Integer required,
+	descri String required maxlength(100),
+	unimis String required maxlength(3),
+	quantity BigDecimal required,
+	aValue BigDecimal required,
+	pagame Integer required,
+	ssAmmMin Integer required,
+	valamm BigDecimal required,
+	accFixedAssets Integer required,
+	accFoundAssets Integer required,
+	accCostAssets Integer required,
+	idNoDeductVat Integer required,
+	noDeductVatRate BigDecimal required,
+	accNoDeductCost Integer required,
+	noDeductCostRate BigDecimal required,
+	lostCostValue BigDecimal required,
+	superAmmort BigDecimal required
+}
+
+entity Gaz001assist {
+	id Integer required,
+	idinstallazione Integer required,
+	tipo String maxlength(3),
+	codice Integer required,
+	utente String required maxlength(50),
+	data LocalDate required,
+	tecnico String required maxlength(50),
+	oggetto String required maxlength(80),
+	descrizione String required maxlength(255),
+	soluzione String maxlength(255),
+	oraInizio String maxlength(5),
+	oraFine String maxlength(5),
+	infoAgg String maxlength(80),
+	clfoco Integer required,
+	ore BigDecimal required,
+	codart String required maxlength(15),
+	prezzo String maxlength(10),
+	codeart String maxlength(10),
+	ripetizione Integer,
+	ogni String maxlength(10),
+	stato String required maxlength(20),
+	note String maxlength(255)
+}
+
+entity Gaz001banapp {
+	codice Integer required,
+	descri String required maxlength(50),
+	codabi Integer required,
+	codcab Integer required,
+	locali String required maxlength(50),
+	codpro String required maxlength(2),
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001bodyText {
+	idBody Integer required,
+	tableNameRef String required maxlength(50),
+	idRef Integer required,
+	bodyText TextBlob required,
+	langId Integer required
+}
+
+entity Gaz001campArtico {
+	idCampartico Integer required,
+	/** Codice articolo uguale alla tabella artico */
+	codice String required maxlength(15),
+	/** macroarea di origine */
+	orMacro Integer required,
+	/** origine specifica */
+	orSpec String required maxlength(80),
+	/** Flag estrazione: 0=non specificata 1=prima spremitura a freddo 2=estratto a freddo */
+	estrazione Integer required,
+	/** Flag agricoltura: 0=convenzionale 1=biologica 2=in conversione */
+	biologico Integer required,
+	/** Flag etichettatura: 0=non etichettato 1=etichettato */
+	etichetta Integer required,
+	/** CapacitĂ  singola confezione. 0=sfuso */
+	confezione BigDecimal required,
+	/** Categoria olio come codificato dal SIAN */
+	categoria Integer required
+}
+
+entity Gaz001campMovSian {
+	idMovSian Integer required,
+	/** Serve in caso di produzione per connettere insieme il prodotto con i suoi componenti */
+	idMovSianRif Integer required,
+	/** Movimento magazzino connesso */
+	idMovmag Integer required,
+	/** ID recipiente stoccaggio di destinazione */
+	recipStoccDestin String required maxlength(10),
+	/** Identificativo recipiente di stoccaggio. Deve essere identico a quello inserito nel SIAN */
+	recipStocc String required maxlength(10),
+	/** Codice dell'operazione esguita */
+	codOperazione String required maxlength(10),
+	/** Identificativo dello stabilimento o deposito assegnato dal SIAN */
+	stabilDep Integer required
+}
+
+entity Gaz001campRecipStocc {
+	/** Codice recipiente di stoccaggio olio. Deve essere identico a quello registrato al SIAN */
+	codSilos String required maxlength(10),
+	/** La capacità in kg di olio del recipiente */
+	capacita BigDecimal required,
+	/** 0=di proprietà 1=in affitto */
+	affitto Integer required,
+	/** 0=non classificato 1=Recipiente destinato a olio DOP o IGP */
+	dopIgp Integer required
+}
+
+entity Gaz001campi {
+	codice Integer required,
+	descri String required maxlength(50),
+	image Blob,
+	indirizzo String maxlength(50),
+	provincia String maxlength(2),
+	comune String maxlength(50),
+	webUrl String required maxlength(255),
+	ricarico BigDecimal required,
+	giornoDecadimento Instant,
+	codiceProdottoUsato String required maxlength(15),
+	idMov Integer,
+	/** Identificativo dello stabilimento/deposito assegnato dal SIAN */
+	idRif Integer,
+	idColture Integer,
+	/** Nelle regioni che hanno già individuato le Zone Vulnerabili da Nitrati di origine agricola, chiamate ZVN, quando si concima, non si può superare un certo limite di azoto annuo */
+	zonaVulnerabile Integer,
+	/** Limite di azoto ad ettaro se ZVN ( valore default = 170) */
+	limiteAzotoZonaVulnerabile Integer required,
+	/** Limite di azoto ad ettaro se zona NON vulnerabile ( valore default = 340) */
+	limiteAzotoZonaNonVulnerabile Integer required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001cashRegister {
+	idCash Boolean required,
+	seziva Integer required,
+	adminid String required maxlength(20),
+	enterpriseid Integer required,
+	serialPort String required maxlength(32),
+	driver String required maxlength(32),
+	descri String required maxlength(32)
+}
+
+entity Gaz001catmer {
+	codice Integer required,
+	descri String required maxlength(50),
+	image Blob required,
+	webUrl String required maxlength(255),
+	ricarico BigDecimal required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001caucon {
+	codice String required maxlength(3),
+	descri String required maxlength(50),
+	insdoc Integer,
+	regiva Integer required,
+	operat Integer required,
+	paySchedule Integer required,
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001cauconRows {
+	cauconCod String required maxlength(3),
+	clfocoRef Integer required,
+	typeImp String required maxlength(1),
+	dareAvere String required maxlength(1),
+	nOrder Integer required
+}
+
+entity Gaz001caumag {
+	codice Integer required,
+	descri String required maxlength(50),
+	clifor Boolean required,
+	insdoc Boolean required,
+	operat Boolean required,
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001clfoco {
+	codice Integer required,
+	idAnagra Integer required,
+	descri String maxlength(100),
+	printMap Boolean required,
+	externalResp Boolean required,
+	/** Descrizione del servizio esternalizzato, verrà riportato sulla nomina a responsabile esterno del trattamento dei dati */
+	externalServiceDescri String required maxlength(100),
+	idAgente Integer required,
+	banapp Integer required,
+	portos Integer required,
+	spediz Integer required,
+	imball Integer required,
+	listin Integer required,
+	destin String required maxlength(100),
+	idDes Integer required,
+	iban String required maxlength(32),
+	siaCode String required maxlength(5),
+	maxrat BigDecimal,
+	ragdoc String required maxlength(1),
+	addbol String required maxlength(1),
+	speban String required maxlength(1),
+	spefat String required maxlength(1),
+	stapre String required maxlength(1),
+	codpag Integer required,
+	/** Sconto di chiusura, viene applicato alla fine e riferito a tutti i righi del corpo dei documenti */
+	sconto BigDecimal,
+	/** Sconto rigo, viene applicato ad ogni singolo rigo dei documenti */
+	scontoRigo BigDecimal,
+	aliiva Integer required,
+	ritenuta BigDecimal required,
+	allegato Boolean required,
+	cosric Integer required,
+	ceedar String required maxlength(8),
+	ceeave String required maxlength(8),
+	paymov String required maxlength(1),
+	operationType String required maxlength(15),
+	idAssets Integer required,
+	sel4espArt Boolean,
+	status String required maxlength(10),
+	/** 0=soggetto non trasmesso al SIAN, 1=soggetto trasmesso al SIAN */
+	statusSian Integer required,
+	annota String required maxlength(3000),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001companyConfig {
+	id Integer required,
+	description String maxlength(100),
+	var String required maxlength(100),
+	val String maxlength(2000)
+}
+
+entity Gaz001companyData {
+	id Integer required,
+	description String maxlength(100),
+	var String required maxlength(100),
+	data String maxlength(255),
+	ref String required maxlength(100)
+}
+
+/** tabella contenente i dati delle Comunicazioni dati fatture (spesometro) secondo le specifiche tecniche dell'Agenzia delle Entrate */
+entity Gaz001comunicazioniDatiFatture {
+	id Integer required,
+	anno Integer,
+	periodicita String required maxlength(1),
+	trimestreSemestre Integer,
+	nomeFileDte String maxlength(100),
+	nomeFileDtr String maxlength(100),
+	nomeFileZip String maxlength(100),
+	idfile String maxlength(18),
+	nomeFileAnn String maxlength(100)
+}
+
+entity Gaz001contract {
+	idContract Integer required,
+	idCustomer Integer required,
+	vatSection Integer required,
+	docNumber Integer required,
+	docType String required maxlength(3),
+	conclusionDate LocalDate,
+	startDate LocalDate,
+	monthsDuration Integer required,
+	initialFee BigDecimal required,
+	periodicReassessment Integer required,
+	periodicity Integer required,
+	paymentMethod Integer required,
+	bank Integer required,
+	tacitRenewal Integer required,
+	currentFee BigDecimal required,
+	codRevenue Integer required,
+	idCon Integer required,
+	vatCode Integer required,
+	idBodyText Integer required,
+	lastReassessment LocalDate,
+	idAgente Integer required,
+	provvigione BigDecimal required,
+	status String required maxlength(10),
+	note String required maxlength(64),
+	adminid String required maxlength(20),
+	lastModified Instant required
+}
+
+entity Gaz001contractRow {
+	idRow Integer required,
+	idContract Integer required,
+	descri String maxlength(100),
+	unimis String required maxlength(3),
+	quanti BigDecimal,
+	price BigDecimal,
+	discount BigDecimal,
+	vatCode Integer required,
+	codRevenue Integer required,
+	idCon Integer required,
+	status String required maxlength(10)
+}
+
+/** Tabella per creare gli "articoli compositi" (distinta base). Un articolo è composito quando è presente in almeno una di queste righe e qundi fa riferimento ad almeno un altro articolo di magazzino. Questi righi si potranno aggiungere tramite lo script admin_artico,  alla fine con il bottone "aggiungi articolo di base" ed immettendo la sola quantità, l'unità di misura ed il prezzo per i documenti di vendita  saranno quelli di sempre ma presi dall'articolo composito, molto facile perchè resterà tutto come prima, mentre la contabilità di magazzino verrà aggiornata tenendo conto di questi righi e non dell'articolo composito. */
+entity Gaz001distintaBase {
+	id Integer required,
+	/** è il codice dell'articolo composito */
+	codiceComposizione String required maxlength(15),
+	/** codice dell'articolo base */
+	codiceArticoBase String required maxlength(15),
+	/** quantità di articoli base necessari per costituire l'articolo composito */
+	quantitaArticoBase BigDecimal required,
+	/** Riferimento ad id_mag del movimento di magazzino. Se =0 indica la struttura di una composizione e verrà utilizzata per generare i relativi movimenti di magazzino, quando valorizzato serve per ricordare l'albero da cui sono stati generati i relativi movimenti di magazzino */
+	idMovmag Integer
+}
+
+entity Gaz001effett {
+	idTes Integer required,
+	tipeff String required maxlength(1),
+	datemi LocalDate,
+	progre Integer required,
+	numfat Integer required,
+	seziva Integer required,
+	protoc Integer required,
+	datfat LocalDate,
+	totfat BigDecimal,
+	salacc String required maxlength(1),
+	impeff BigDecimal,
+	scaden LocalDate,
+	clfoco Integer required,
+	pagame Integer required,
+	banapp Integer required,
+	banacc Integer required,
+	idDoc Integer required,
+	idCon Integer required,
+	cigcup String required maxlength(40),
+	status String required maxlength(10),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001extcon {
+	year Integer required,
+	cosServInd BigDecimal,
+	cosServAmm BigDecimal,
+	cosServCom BigDecimal,
+	cosGodbInd BigDecimal,
+	cosGodbAmm BigDecimal,
+	cosGodbCom BigDecimal,
+	cosPersInd BigDecimal,
+	cosPersAmm BigDecimal,
+	cosPersCom BigDecimal,
+	cosAmmsInd BigDecimal,
+	cosAmmsAmm BigDecimal,
+	cosAmmsCom BigDecimal,
+	cosAccrInd BigDecimal,
+	cosAccrAmm BigDecimal,
+	cosAccrCom BigDecimal,
+	cosAccaInd BigDecimal,
+	cosAccaAmm BigDecimal,
+	cosAccaCom BigDecimal,
+	cosDivgInd BigDecimal,
+	cosDivgAmm BigDecimal,
+	cosDivgCom BigDecimal,
+	debBreve BigDecimal,
+	debMedio BigDecimal,
+	debLungo BigDecimal,
+	numDip Integer
+}
+
+entity Gaz001faeFlux {
+	id Integer required,
+	filenameOri String required maxlength(30),
+	/** Nome del pacchetto zip contenitore dei file xml, è un metodo utilizzato quando lo si trasmette massivamente ad un intermediario */
+	filenameZipPackage String required maxlength(50),
+	idTesRef Integer required,
+	execDate Instant required,
+	receivedDate Instant required,
+	deliveryDate Instant required,
+	filenameSon String required maxlength(30),
+	idSdi String required maxlength(20),
+	filenameRet String required maxlength(30),
+	mailId String required maxlength(50),
+	data Blob required,
+	fluxStatus String required maxlength(10),
+	fluxCompleted Integer required,
+	progrRet String required maxlength(4),
+	fluxDescri String required maxlength(255)
+}
+
+entity Gaz001files {
+	idDoc Integer required,
+	tableNameRef String required maxlength(50),
+	idRef Integer required,
+	itemRef String required maxlength(15),
+	extension String required maxlength(4),
+	title String required maxlength(255),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001fornitoreMagazzino {
+	id Integer required,
+	idAnagr Integer required,
+	codiceFornitore String required maxlength(50),
+	codiceMagazzino String required maxlength(15),
+	rapportoQtaFornitore BigDecimal required,
+	lastPrice BigDecimal required,
+	dateInsert LocalDate required,
+	dateUpdate Instant
+}
+
+entity Gaz001imball {
+	codice Integer required,
+	descri String required maxlength(50),
+	weight BigDecimal required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001instal {
+	id Integer required,
+	codice Integer required,
+	clfoco Integer required,
+	oggetto String required maxlength(100),
+	descrizione String required maxlength(255),
+	seriale String required maxlength(255),
+	datainst LocalDate required,
+	note String required maxlength(255)
+}
+
+entity Gaz001letter {
+	idLet Integer required,
+	writeDate LocalDate,
+	numero String required maxlength(20),
+	revision String required maxlength(3),
+	clfoco Integer required,
+	/** Utilizzato per inviare i documenti ad un indirizzo diverso da quello in anagrafica */
+	email String maxlength(50),
+	tipo String required maxlength(3),
+	cA String required maxlength(60),
+	oggetto String required maxlength(128),
+	corpo String maxlength(255),
+	signature Boolean required,
+	note String required maxlength(64),
+	status String required maxlength(16),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+/** tabella contenente i dati delle Comunicazioni delle liquidazioni periodiche dell'IVA secondo le specifiche tecniche dell'Agenzia delle Entrate */
+entity Gaz001liquidazioniIva {
+	id Integer required,
+	anno Integer,
+	periodicita String required maxlength(1),
+	meseTrimestre Integer,
+	nomeFileXml String maxlength(100),
+	subforniture Integer,
+	eventiEccezionali Integer,
+	vp2 BigDecimal,
+	vp3 BigDecimal,
+	vp4 BigDecimal,
+	vp5 BigDecimal,
+	vp7 BigDecimal,
+	vp8 BigDecimal,
+	vp9 BigDecimal,
+	vp10 BigDecimal,
+	vp11 BigDecimal,
+	vp12 BigDecimal,
+	vp13 BigDecimal,
+	vp13m Integer
+}
+
+entity Gaz001lotmag {
+	id Integer required,
+	codart String required maxlength(15),
+	idMovmag Integer required,
+	idRigdoc Integer required,
+	identifier String required maxlength(100),
+	expiry Instant
+}
+
+entity Gaz001movmag {
+	idMov Integer required,
+	caumag Integer required,
+	/** Quaderno di campagna: 1=si 0=no   */
+	typeMov Integer required,
+	operat Boolean required,
+	datreg LocalDate required,
+	tipdoc String required maxlength(3),
+	desdoc String required maxlength(50),
+	datdoc LocalDate required,
+	clfoco Integer required,
+	scochi BigDecimal required,
+	idRif Integer required,
+	artico String required maxlength(50),
+	idLotmag Integer required,
+	/** Ref. alla tabella gaz_001orderman (produzioni-contabilità industriale)  */
+	idOrderman Integer required,
+	quanti BigDecimal,
+	prezzo BigDecimal,
+	scorig BigDecimal,
+	/** Ref.alla colonna codice della tabella gaz_001campi */
+	campoColtivazione Integer required,
+	/** Utilizzato da quaderno di campagna */
+	idAvversita Integer required,
+	/** Utilizzato da quaderno di campagna */
+	idColture Integer required,
+	status String required maxlength(10),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001orderman {
+	id Integer required,
+	orderType String maxlength(3),
+	description String required maxlength(80),
+	addInfo String maxlength(255),
+	idTesbro Integer required,
+	/** Riferimento al rigo ordine da cliente del modulo vendite */
+	idRigbro Integer required,
+	/** Riferimento al lotto (tabella gaz_NNNlotmag) per la tracciabilità e/o certificazione delle produzioni  */
+	idLotmag Integer required,
+	/** Se valorizzata questa referenza assegna l'ordine/commessa/produzione ad un impianto specifico, ovvero al campo del modulo camp (se azienda agricola) */
+	campoImpianto Integer required,
+	/** Durata della produzione */
+	duration Integer required,
+	/** Utilizzabile per la preselezione della persona addetta alla produzione/consulenza/intervento e/o al collaboratore responsabile della stessa */
+	idStaffDef Integer required,
+	/** 0=aperto, 1=in attesa, 2=in lavorazione, 3=materiale ordinato, 4=incontrate difficoltà, 5=in attesa di spedizione, 6=spedito, 7=consegnato, 8=non chiuso, 9=chiuso */
+	statoLavorazione Integer required,
+	trackingNo String required maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001pagame {
+	codice Integer required,
+	descri String required maxlength(50),
+	tippag String required maxlength(1),
+	incaut Integer required,
+	pagaut Integer,
+	tipdec String required maxlength(1),
+	giodec Integer required,
+	mesesc Integer required,
+	messuc Integer required,
+	giosuc Integer required,
+	numrat Integer required,
+	tiprat String required maxlength(1),
+	faeMode String required maxlength(4),
+	idBank Integer required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001paymov {
+	id Integer required,
+	idTesdocRef String required maxlength(15),
+	idRigmocPay Integer required,
+	idRigmocDoc Integer required,
+	amount BigDecimal required,
+	expiry LocalDate required
+}
+
+entity Gaz001portos {
+	codice Integer required,
+	descri String required maxlength(50),
+	incoterms String required maxlength(3),
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001provvigioni {
+	idProvvigione Integer required,
+	idAgente Integer required,
+	codArticolo String required maxlength(15),
+	codCatmer Integer required,
+	percentuale BigDecimal required
+}
+
+entity Gaz001ragstat {
+	codice String required maxlength(15),
+	descri String required maxlength(50),
+	image Blob required,
+	webUrl String required maxlength(255),
+	ricarico BigDecimal required,
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+/** Registro dei trattamenti (ex art.30 Regolamento UE 2016/679 - GDPR) */
+entity Gaz001registroTrattamentoDati {
+	revision Integer required,
+	dataEmissione LocalDate required,
+	/** Attività svolta */
+	a01 String required maxlength(255),
+	/** Forma sociale */
+	a02 String required maxlength(255),
+	/** Sede dell'attività */
+	a03 String required maxlength(255),
+	/** Struttura dei luoghi di svolgimento dell'attività */
+	a04 String required maxlength(255),
+	/** Numero dei titolari dell'attività */
+	a05 Integer required,
+	/** Numero dei dipendenti */
+	a06 Integer required,
+	/** Numero dei collaboratori */
+	a07 Integer required,
+	/** Raccolta e gestione dei dati elettronica */
+	a08e Boolean required,
+	/** Raccolta e gestione dei dati cartacea */
+	a08c Boolean required,
+	/** Descrizione sistemi informatici presenti */
+	a09 String required maxlength(255),
+	/** Titolare del trattamento (Nominativo e dati di contatto) */
+	a10 String required maxlength(255),
+	/** Contitolare del trattamento (se presente, nominativo e dati di contatto) */
+	a11 String required maxlength(255),
+	/** Rappresentante del titolare del trattamento (se presente, nominativo e dati di contatto) */
+	a12 String required maxlength(255),
+	/** Responsabile del titolare del trattamento (se presente, nominativo e dati di contatto) */
+	a13 String required maxlength(255),
+	/** Il titolare ha aderito ad un codice di condotta (si-no) */
+	a14 Boolean required,
+	/** Il titolare ha aderito ad un sistema di certificazione art.42 Regolamento (si-no) */
+	a15 Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: anagrafica */
+	b01a Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: svolgimento attività principali e accessorie */
+	b01b Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: promozione servizi del titolare */
+	b01c Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: promozione servizi terzi */
+	b01d Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: rilevazione abitudini di consumo */
+	b01e Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: profilazione dei dati ex art.4 n.4 del Regolamento */
+	b01f Boolean required,
+	/** Finalità del trattamento dei dati personali degli interessati raccolti dal titolare: rapporto di lavoro /collaborazione */
+	b01g Boolean required,
+	/** Trattamento dei dati personali per finalità anagrafica: clienti */
+	b02a Boolean required,
+	/** Trattamento dei dati personali per finalità anagrafica: fornitori */
+	b02b Boolean required,
+	/** Trattamento dei dati personali per finalità anagrafica: dipendenti/collaboratori */
+	b02c Boolean required,
+	/** Trattamento dei dati personali per finalità di svolgimento delle attività principali e accessorie del titolare: clienti */
+	b03a Boolean required,
+	/** Trattamento dei dati personali per finalità di svolgimento delle attività principali e accessorie del titolare: fornitori */
+	b03b Boolean required,
+	/** Trattamento dei dati personali per finalità di svolgimento delle attività principali e accessorie del titolare: dipendenti/collaboratori */
+	b03c Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi del titolare: clienti */
+	b04a Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi del titolare: fornitori */
+	b04b Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi del titolare: dipendenti/collaboratori */
+	b04c Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi di terzi: clienti */
+	b05a Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi di terzi: fornitori */
+	b05b Boolean required,
+	/** Trattamento dei dati personali per finalità di promozione dei servizi di terzi: dipendenti/collaboratori */
+	b05c Boolean required,
+	/** Trattamento dei dati personali per rilevamento delle abitudini di consumo dell'interessato: clienti */
+	b06a Boolean required,
+	/** Trattamento dei dati personali per rilevamento delle abitudini di consumo dell'interessato: fornitori */
+	b06b Boolean required,
+	/** Trattamento dei dati personali per rilevamento delle abitudini di consumo dell'interessato: dipendenti/collaboratori */
+	b06c Boolean required,
+	/** Trattamento dei dati personali per i fini e con le modalità di cui all'art.4 n.4 del Regolamento (profilazione dati): clienti */
+	b07a Boolean required,
+	/** Trattamento dei dati personali per i fini e con le modalità di cui all'art.4 n.4 del Regolamento (profilazione dati): fornitori */
+	b07b Boolean required,
+	/** Trattamento dei dati personali per i fini e con le modalità di cui all'art.4 n.4 del Regolamento (profilazione dati): dipendenti/collaboratori */
+	b07c Boolean required,
+	/** Trattamento dei dati personali per finalità relative al rapporto di lavoro/collaborazione: clienti */
+	b08a Boolean required,
+	/** Trattamento dei dati personali per finalità relative al rapporto di lavoro/collaborazione: fornitori */
+	b08b Boolean required,
+	/** Trattamento dei dati personali per finalità relative al rapporto di lavoro/collaborazione: dipendenti/collaboratori */
+	b08c Boolean required,
+	/** Base giuridica del trattamento dei dati: legge */
+	c01a Boolean required,
+	/** Base giuridica del trattamento dei dati: contratto */
+	c01b Boolean required,
+	/** Base giuridica del trattamento dei dati: standard internazionale */
+	c01c Boolean required,
+	/** Termini massimi consentiti per la cancellazione dei dati: Dati personali art.4 (Ai fini del presente regolamento s'intende per: 1) «dato personale»: qualsiasi informazione riguardante una persona fisica identificata o identificabile («interessato»); si considera identificabile la persona fisica che può essere identificata, direttamente o indirettamente, con particolare riferimento a un identificativo come il nome, un numero di identificazione, dati relativi all'ubicazione, un identificativo online o a uno o più elementi caratteristici della sua identità fisica, fisiologica, genetica, psichica, economica, culturale o sociale) */
+	c02a Integer required,
+	/** Termini massimi consentiti per la cancellazione dei dati: Dati personali art.9 ( È vietato trattare dati personali che rivelino l'origine razziale o etnica, le opinioni politiche, le convinzioni religiose o filosofiche, o l'appartenenza sindacale, nonché trattare dati genetici, dati biometrici intesi a identificare in modo univoco una persona fisica, dati relativi alla salute o alla vita sessuale o all'orientamento sessuale della persona) */
+	c02b Integer required,
+	/** Termini massimi consentiti per la cancellazione dei dati: Dati personali art.10 (Il trattamento dei dati personali relativi alle condanne penali e ai reati o a connesse misure di sicurezza sulla base dell'articolo 6, paragrafo 1, deve avvenire soltanto sotto il controllo dell'autorità pubblica o se il trattamento è autorizzato dal diritto dell'Unione o degli Stati membri che preveda garanzie appropriate per i diritti e le libertà degli interessati. Un eventuale registro completo delle condanne penali deve essere tenuto soltanto sotto il controllo dell'autorità pubblica) */
+	c02c Integer required,
+	/** Vengono eseguiti trattamenti in cui i dati sono comunicati a terzi? (0=NO, 1=SI) */
+	c03 Boolean required,
+	/** Se Si quali trattamenti? descrivi */
+	c03TipoDescri String required maxlength(255),
+	/** Se Si verso quali categorie di terzi: 1) fornitori di annunci / pubblicità, 2) mediatori (art. 1754 c.c.), 3) notai, 4) assicurazioni, 5) architetti, 6) avvocati, 7) commercialisti, 8) istituti di credito, 9) altri soggetti esercenti attività finanziarie, 0) altre categorie descritte sotto */
+	c03a Boolean required,
+	/** Descrizione altra  categorie di terzi (quando sopra = 0) */
+	c03aAltraCatDescri String required maxlength(255),
+	/** Vengono eseguiti trattamenti in cui i dati sono comunicati a destinatari di Paesi terzi e/o Organizzazioni internazionali? (Se no lasciare vuoto) */
+	c04 String required maxlength(255),
+	/** Descrizione dei sistemi informatici: computer singolo */
+	d01a Boolean required,
+	/** Descrizione dei sistemi informatici: più computer non collegati tra loro */
+	d01b Boolean required,
+	/** Descrizione dei sistemi informatici: sistemi connessi ad internet */
+	d01c Boolean required,
+	/** Descrizione dei sistemi informatici: sistemi connessi ad entranet */
+	d01d Boolean required,
+	/** Descrizione dei sistemi informatici: sistemi connessi a cloud */
+	d01e Boolean required,
+	/** Descrizione dei sistemi informatici: presenza di server */
+	d01f Boolean required,
+	/** Sistemi di sicurezza dei dati personali: pseudonimizzazione  */
+	d02a Boolean required,
+	/** Sistemi di sicurezza dei dati personali: cifratura */
+	d02b Boolean required,
+	/** Sistemi di sicurezza dei dati personali: sistemi protetti da password */
+	d02c Boolean required,
+	/** Sistemi di sicurezza dei dati personali: sistemi antivirus */
+	d02d Boolean required,
+	/** Sistemi di sicurezza dei dati personali: sistemi anti malware */
+	d02e Boolean required,
+	/** Sistemi di sicurezza dei dati personali: sistemi firewall */
+	d02f Boolean required,
+	/** Sistemi di sicurezza dei dati personali: sistemi di backup */
+	d02g Boolean required,
+	/** Sistemi di pseudonimizzazione dei dati adottati, Art. 4 Regolamento 679/2016: “1. 5) «pseudonimizzazione»: il trattamento dei dati personali in modo tale che i dati personali non possano più essere attribuiti a un interessato specifico senza l'utilizzo di informazioni aggiuntive, a condizione che tali informazioni aggiuntive siano conservate separatamente e soggette a misure tecniche e organizzative intese a garantire che tali dati personali non siano attribuiti a una persona fisica identificata o identificabile" */
+	d03 String required maxlength(255),
+	/** Sistemi di cifratura dei dati adottati */
+	d04 String required maxlength(255),
+	/** Sistemi di protezione mediante password adottati */
+	d05 String required maxlength(255),
+	/** Giorni aggiornamento password */
+	d05Giorni Integer required,
+	/** Sistemi antivirus adottati */
+	d06 String required maxlength(255),
+	/** Giorni aggiornamento antivirus */
+	d06Giorni Integer required,
+	/** Sistemi anti malware adottati */
+	d07 String required maxlength(255),
+	/** Giorni aggiornamento anti malware */
+	d07Giorni Integer required,
+	/** Sistemi firewall adottati */
+	d08 String required maxlength(255),
+	/** Giorni aggiornamento firewall */
+	d08Giorni Integer required,
+	/** Sistemi back up adottati */
+	d09 String required maxlength(255),
+	/** Giorni intervallo backup */
+	d09Giorni Integer required,
+	/** Le misure di sicurezza adottate nel loro insieme garantiscono un adeguato livello di sicurezza? */
+	d10 Boolean required,
+	/** Livello di attuazione del codice di condotta (0=nullo, 1-8=parziale, 9=totale) */
+	d11 Boolean required,
+	/** Il codice di condotta adottato quali adempimenti prescrive in materia di sicurezza? (es."ogni utente è stato edotto tramite il REGOLAMENTO PER L'UTILIZZO DELLE RISORSE INFORMATICHE") */
+	d11Descri String required maxlength(255),
+	/** Livello di attuazione delle prescrizioni imposte da sistema di certificazione adottato (0=nullo, 1-8=parziale, 9=totale) */
+	d12 Boolean required,
+	/** Descrizione degli adempimenti del sistema di certificazione adottato in materia di sicurezza dei dati */
+	d12Descri String required maxlength(255),
+	/** Archivi elettronici: descrizione dei sistemi hardware e software utilizzati per archiviare i dati */
+	e01 String required maxlength(255),
+	/** Archivi cartacei: Descrizione dei sistemi utilizzati per archiviare i dati */
+	e02 String required maxlength(255),
+	/** Luogo di presenza degli archivi elettronici (0=presso il titolare nella propria sede, 1=presso il titolare ma in altri luoghi in territorio italiano, 2=presso il titolare ma in altri luoghi in territorio UE, 3=presso il titolare ma in altri luoghi in territorio extra UE, 4=presso soggeti terzi in territorio Italiano, 5=presso soggeti terzi in territorio UE, 6=presso soggeti terzi in territorio extra UE) */
+	e03 Boolean required,
+	/** eventuale territorio extra UE */
+	e03Extra String required maxlength(255),
+	/** Luogo di presenza degli archivi cartacei (0=presso il titolare nella propria sede, 1=presso il titolare ma in altri luoghi in territorio italiano, 2=presso il titolare ma in altri luoghi in territorio UE, 3=presso il titolare ma in altri luoghi in territorio extra UE, 4=presso soggeti terzi in territorio Italiano, 5=presso soggeti terzi in territorio UE, 6=presso soggeti terzi in territorio extra UE) */
+	e04 Boolean required,
+	/** eventuale territorio extra UE */
+	e04Extra String required maxlength(255),
+	/** Sono effettuati trattamenti che possono presentare rischi per i diritti e le libertà degli interessati?  */
+	f01 Boolean required,
+	/** In caso di risposta positiva al punto F.01: i trattamenti sono occasionali? */
+	f02 Boolean required,
+	/** In caso di risposta positiva al punto F.01: i trattamenti includono categorie di dati di cui all’art. 9 del Regolamento (dati sensibili, genetici e biometrici)? */
+	f03 Boolean required,
+	/** In caso di risposta positiva al punto F.01: i trattamenti includono categorie di dati di cui all’art. 10 del Regolamento (dati relativi a condanne penali e/o a reati)? */
+	f04 Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: a) rottura dei sistemi di archiviazione dati elettronici  */
+	g01a Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: b) interruzione non programmata dell’alimentazione dei sistemi informatici */
+	g01b Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: c) furto degli archivi informatici */
+	g01c Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: d) furto degli archivi cartacei */
+	g01d Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: e) perdita dei dati informatici a causa di virus o di altri agenti informatici automatizzati */
+	g01e Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: f) perdita dei dati informatici a causa di intrusione nei sistemi informatici dall’esterno */
+	g01f Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: g) cancellazione non volontaria dei dati */
+	g01g Boolean required,
+	/** Rischi individuati relativi alla possibile perdita di dati: h) distruzione non volontaria di documenti contenti dati */
+	g01h Boolean required,
+	/** Rischi individuati relativi alla possibile sottrazione e divulgazione non autorizzata di dati: a) furto degli archivi informatici */
+	g02a Boolean required,
+	/** Rischi individuati relativi alla possibile sottrazione e divulgazione non autorizzata di dati: b) furto degli archivi cartacei */
+	g02b Boolean required,
+	/** Rischi individuati relativi alla possibile sottrazione e divulgazione non autorizzata di dati: c) sottrazione di dati contenuti in archivi informatici a causa di virus o di altri agenti informatici automatizzati */
+	g02c Boolean required,
+	/** Rischi individuati relativi alla possibile sottrazione e divulgazione non autorizzata di dati: d) sottrazione di dati contenuti in archivi informatici a causa di intrusione di nei sistemi informatici di soggetti dall’esterno */
+	g02d Boolean required,
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: a) rottura dei sistemi di archiviazione dati elettronici  */
+	g03a String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: b) interruzione non programmata dell’alimentazione dei sistemi informatici */
+	g03b String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: c) furto degli archivi informatici */
+	g03c String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: d) furto degli archivi cartacei */
+	g03d String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: e) perdita dei dati informatici a causa di virus o di altri agenti informatici automatizzati */
+	g03e String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: f) perdita dei dati informatici a causa di intrusione nei sistemi informatici dall’esterno */
+	g03f String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: g) cancellazione non volontaria dei dati */
+	g03g String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile perdita di dati (G.01) per: h) distruzione non volontaria di documenti contenti dati */
+	g03h String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile sottrazione e divulgazione non autorizzata di dati (G.02):  a) furto degli archivi informatici */
+	g04a String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile sottrazione e divulgazione non autorizzata di dati (G.02):  b) furto degli archivi cartacei */
+	g04b String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile sottrazione e divulgazione non autorizzata di dati (G.02): c) sottrazione di dati contenuti in archivi informatici a causa di virus o di altri agenti informatici automatizzati */
+	g04c String required maxlength(255),
+	/** Individuazione soluzioni relative ai rischi inerenti alla possibile sottrazione e divulgazione non autorizzata di dati (G.02): d) sottrazione di dati contenuti in archivi informatici a causa di intrusione di nei sistemi informatici di soggetti dall’esterno */
+	g04d String required maxlength(255),
+	/** Procedure di comunicazione di Data Breach relative ai rischi inerenti alla possibile perdita di dati (G.01) */
+	g05 String required maxlength(255),
+	/** Procedure di comunicazione di Data Breach relative alla possibile sottrazione e divulgazione non autorizzata di dati (G.02) */
+	g06 String required maxlength(255),
+	/** Registro dei Data Breach (Data, tipo di evento, rimedi posti in atto e comunicazione) */
+	g07 String required maxlength(255),
+	/** Modalità di conservazione del Registro (cartaceo o elettronico, in quest'ultimo caso indicare il software utilizzato: es. GAzie)  */
+	h01 String required maxlength(255),
+	/** Elenco dei soggetti autorizzati ad accedere al Registro */
+	h02 String required maxlength(255),
+	/** Soggetto responsabile alla conservazione e distribuzione del Registro */
+	h03 String required maxlength(255),
+	/** Prossima revisione del Registro */
+	h04 LocalDate required,
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+/** Righi dei documenti le cui testate sono contenute in gaz_NNNtesbro */
+entity Gaz001rigbro {
+	idRig Integer required,
+	idTes Integer required,
+	tiprig Integer required,
+	codart String required maxlength(15),
+	codiceFornitore String required maxlength(50),
+	/** 1000 caratteri per uniformarsi al tracciato della fattura elettronica */
+	descri String required maxlength(1000),
+	/** per indicare la qualità del materiale richiesto, normativa, ecc */
+	quality String required maxlength(50),
+	idBodyText Integer required,
+	unimis String required maxlength(3),
+	/** espresso in mm */
+	larghezza BigDecimal,
+	/** espresso in mm */
+	lunghezza BigDecimal,
+	/** espresso in mm */
+	spessore BigDecimal,
+	/** non necessariamente in kg/l, potrà moltiplicare anche con i ml, mq, pezzi */
+	pesoSpecifico BigDecimal,
+	pezzi Integer,
+	quanti BigDecimal,
+	prelis BigDecimal,
+	sconto BigDecimal,
+	codvat Integer required,
+	pervat BigDecimal,
+	codric Integer required,
+	provvigione BigDecimal required,
+	ritenuta BigDecimal required,
+	deliveryDate LocalDate,
+	idDoc Integer required,
+	idMag Integer required,
+	/** Per avere riferimenti uno a molti, e viceversa, con le produzioni (orderman) */
+	idOrderman Integer,
+	status String required maxlength(100)
+}
+
+/** Righi dei documenti le cui testate sono contenute in gaz_NNNtesdoc */
+entity Gaz001rigdoc {
+	idRig Integer required,
+	idTes Integer required,
+	tiprig Integer required,
+	codart String required maxlength(15),
+	codiceFornitore String required maxlength(50),
+	/** 1000 caratteri per uniformarsi al tracciato della fattura elettronica */
+	descri String required maxlength(1000),
+	/** per indicare la qualità del materiale richiesto, normativa, ecc */
+	quality String required maxlength(50),
+	idBodyText Integer required,
+	unimis String required maxlength(3),
+	/** espresso in mm */
+	larghezza BigDecimal,
+	/** espresso in mm */
+	lunghezza BigDecimal,
+	/** espresso in mm */
+	spessore BigDecimal,
+	/** non necessariamente in kg/l, potrà moltiplicare anche con i ml, mq, pezzi */
+	pesoSpecifico BigDecimal,
+	pezzi Integer,
+	quanti BigDecimal,
+	prelis BigDecimal,
+	sconto BigDecimal,
+	codvat Integer required,
+	pervat BigDecimal,
+	codric Integer required,
+	/** Provvigione in caso di agente oppure percentuale cassa previdenziale in caso di tipo rigo = 4 */
+	provvigione BigDecimal required,
+	ritenuta BigDecimal required,
+	idOrder Integer required,
+	idMag Integer required,
+	/** Ref. alla tabella gaz_001orderman (produzioni-contabilità industriale)  */
+	idOrderman Integer required,
+	status String required maxlength(10)
+}
+
+/** Righi dei movimenti contabili le cui testate sono contenute in gaz_NNNtesmov */
+entity Gaz001rigmoc {
+	idRig Integer required,
+	idTes Integer required,
+	darave String required maxlength(1),
+	codcon Integer required,
+	import BigDecimal,
+	/** Ref. alla tabella gaz_001orderman (produzioni-contabilità industriale)  */
+	idOrderman Integer required
+}
+
+/** Righi dei movimenti IVA le cui testate sono contenute in gaz_NNNtesmov */
+entity Gaz001rigmoi {
+	idRig Integer required,
+	idTes Integer required,
+	tipiva String required maxlength(1),
+	reverseChargeIdtes Integer required,
+	operationType String required maxlength(15),
+	codiva Integer required,
+	periva BigDecimal,
+	imponi BigDecimal,
+	impost BigDecimal
+}
+
+entity Gaz001scontiArticoli {
+	clfoco Integer required,
+	codart String required maxlength(15),
+	sconto BigDecimal,
+	prezzoNetto BigDecimal
+}
+
+entity Gaz001scontiRaggruppamenti {
+	clfoco Integer required,
+	ragstat String required maxlength(15),
+	sconto BigDecimal
+}
+
+entity Gaz001spediz {
+	codice Integer required,
+	descri String required maxlength(50),
+	annota String maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001staff {
+	idStaff Integer required,
+	idClfoco Integer required,
+	idContract Integer required,
+	idWorkerType Integer required,
+	jobTitle String maxlength(100),
+	employmentStatus Integer,
+	/** Costo orario del lavoro */
+	lastHourlyCost BigDecimal,
+	joinedDate LocalDate,
+	jobGrade String maxlength(50),
+	title String maxlength(100),
+	institution String maxlength(100),
+	graduationYear LocalDate,
+	startDate LocalDate,
+	endDate LocalDate,
+	codiceCcnl String required maxlength(30)
+}
+
+entity Gaz001staffSkills {
+	id Integer required,
+	idStaff Integer required,
+	variableName String maxlength(50),
+	skillValue String maxlength(100)
+}
+
+entity Gaz001staffWorkedHours {
+	idStaff Integer required,
+	workDay LocalDate,
+	hoursNormal BigDecimal required,
+	idWorkTypeExtra Integer required,
+	hoursExtra BigDecimal required,
+	idAbsenceType Integer required,
+	hoursAbsence BigDecimal required,
+	idOtherType Integer required,
+	hoursOther BigDecimal required,
+	note String maxlength(255),
+	/** sarà legato al piano dei conti per gestire le commesse (centri di costo) */
+	idOrderman Integer
+}
+
+entity Gaz001syncronizeOc {
+	id Integer required,
+	tableOc String required maxlength(40),
+	tableGz String required maxlength(40),
+	idOc Integer required,
+	idGz Integer required,
+	dateCreated Instant required,
+	dateUpdate Instant required
+}
+
+/** Testate documenti che non hanno valenza fiscale. Ordini, preventivi, commesse, ecc */
+entity Gaz001tesbro {
+	idTes Integer required,
+	seziva Integer required,
+	tipdoc String required maxlength(3),
+	template String maxlength(32),
+	/** Utilizzato per inviare i documenti ad un indirizzo diverso da quello in anagrafica */
+	email String maxlength(50),
+	printTotal Integer required,
+	deliveryTime Integer required,
+	dayOfValidity Integer required,
+	datemi LocalDate,
+	weekdayRepeat Integer required,
+	protoc Integer required,
+	numdoc Long required,
+	numfat String required maxlength(20),
+	datfat LocalDate,
+	clfoco Integer required,
+	pagame Integer required,
+	banapp Integer required,
+	vettor Integer required,
+	listin Integer required,
+	destin String required maxlength(100),
+	idDes Integer required,
+	idDesSameCompany Integer required,
+	spediz String required maxlength(50),
+	portos String required maxlength(50),
+	imball String required maxlength(50),
+	traspo BigDecimal,
+	speban BigDecimal,
+	spevar BigDecimal,
+	roundStamp Boolean required,
+	cauven Integer required,
+	caucon String required maxlength(3),
+	caumag Integer required,
+	idAgente Integer required,
+	/** riferimento ad id_tes del documento genitore  (es. ordine riferito a preventivo genitore) */
+	idParentDoc Integer required,
+	sconto BigDecimal,
+	expenseVat Integer required,
+	stamp BigDecimal required,
+	taxstamp BigDecimal required,
+	virtualTaxstamp Boolean required,
+	netWeight BigDecimal required,
+	grossWeight BigDecimal required,
+	units Integer required,
+	volume BigDecimal required,
+	initra Instant,
+	geneff String required maxlength(1),
+	idContract Integer required,
+	idCon Integer required,
+	idOrderman Integer required,
+	status String required maxlength(10),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+/** Testate documenti fiscalmente validi. Fatture, Note credito, , Documenti di Trasporto, ecc */
+entity Gaz001tesdoc {
+	idTes Integer required,
+	seziva Integer required,
+	tipdoc String required maxlength(3),
+	ddtType String required maxlength(1),
+	idDocRitorno Integer required,
+	template String maxlength(32),
+	/** Utilizzato per inviare i documenti ad un indirizzo diverso da quello in anagrafica */
+	email String maxlength(50),
+	datemi LocalDate,
+	weekdayRepeat Integer required,
+	dataOrdine LocalDate,
+	protoc Integer required,
+	numdoc Integer required,
+	numfat String required maxlength(20),
+	datfat LocalDate,
+	clfoco Integer required,
+	pagame Integer required,
+	ragbol Integer required,
+	banapp Integer required,
+	vettor Integer required,
+	listin Integer required,
+	destin String required maxlength(100),
+	idDes Integer required,
+	idDesSameCompany Integer required,
+	spediz String required maxlength(50),
+	portos String required maxlength(50),
+	imball String required maxlength(50),
+	traspo BigDecimal,
+	speban BigDecimal,
+	spevar BigDecimal,
+	roundStamp Boolean required,
+	cauven Integer required,
+	caucon String required maxlength(3),
+	caumag Integer required,
+	idAgente Integer required,
+	/** riferimento ad id_tes del documento genitore  (es. ordine riferito a preventivo genitore) */
+	idParentDoc Integer required,
+	sconto BigDecimal,
+	expenseVat Integer required,
+	stamp BigDecimal required,
+	taxstamp BigDecimal required,
+	virtualTaxstamp Boolean required,
+	netWeight BigDecimal required,
+	grossWeight BigDecimal required,
+	units Integer required,
+	volume BigDecimal required,
+	initra Instant,
+	geneff String required maxlength(1),
+	/** In caso di corrispettivo, scontrino con causale VCO, viene usato per contenere l'id del registratore ovvero id_cash della tabella gaz_NNNcash_register, se "0" verrà generato un file XML, altrimenti verranno inviati i dati al RT in base a quanto indicato sul rigo della tabella citata */
+	idContract Integer required,
+	idCon Integer required,
+	/** Data in cui si vuole venga registrata in contabilità la fattura d'acquisto (prima veniva messo in impropriamente in datemi) */
+	datreg LocalDate,
+	/** Nome del file zip in cui è contenuto la fattura elettronica */
+	fatturaElettronicaZipPackage String maxlength(100),
+	fatturaElettronicaOriginalName String maxlength(100),
+	fatturaElettronicaOriginalContent Blob,
+	/** Numero di reinvii allo SdI della fattura elettronica, assieme alla sezione, alla data fattura e al numero di protocollo e dopo un encode in base 36 determinerà gli ultimi cinque caratteri del nome file */
+	fatturaElettronicaReinvii Integer,
+	status String required maxlength(10),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+/** Testate dei movimenti contabili */
+entity Gaz001tesmov {
+	idTes Integer required,
+	caucon String required maxlength(3),
+	descri String required maxlength(100),
+	/** Note che NON vengono stampate sui registri contabili */
+	notess String maxlength(255),
+	datreg LocalDate,
+	/** Data di riferimento del periodo della liquidazione periodica dell'IVA, non può precedere la data del documento (datdoc) */
+	datliq LocalDate,
+	seziva Integer required,
+	idDoc Integer required,
+	protoc Integer required,
+	numdoc String required maxlength(20),
+	datdoc LocalDate,
+	clfoco Integer required,
+	regiva String required maxlength(1),
+	operat Integer required,
+	libgio String required maxlength(1),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity Gaz001vettor {
+	codice Integer required,
+	ragioneSociale String required maxlength(100),
+	indirizzo String required maxlength(100),
+	cap String required maxlength(5),
+	citta String required maxlength(100),
+	provincia String required maxlength(100),
+	partitaIva String required maxlength(12),
+	codiceFiscale String required maxlength(16),
+	nAlbo String required maxlength(50),
+	descri String required maxlength(100),
+	telefo String required maxlength(50),
+	annota String required maxlength(50),
+	adminid String required maxlength(20),
+	lastModified Instant
+}
+
+entity GazAdmin {
+	image Blob required,
+	lang String required maxlength(15),
+	style String required maxlength(15),
+	skin String required maxlength(60),
+	abilit Integer required,
+	access Integer required,
+	lastIp String required maxlength(39),
+	userId Integer required,
+	/** user's first name */
+	userFirstname String required maxlength(30),
+	/** user's last name */
+	userLastname String required maxlength(30),
+	/** user's name, unique */
+	userName String required maxlength(64),
+	/** user's password in salted and hashed format */
+	userPasswordHash String required maxlength(255),
+	aesKey String required maxlength(255),
+	/** user's email, unique */
+	userEmail String required maxlength(64),
+	/** user's telephone number */
+	userTelephone String required maxlength(30),
+	/** user's activation status */
+	userActive Boolean required,
+	/** user's email verification hash string */
+	userActivationHash String maxlength(40),
+	/** user's password reset code */
+	userPasswordResetHash String maxlength(40),
+	/** timestamp of the password reset request */
+	userPasswordResetTimestamp Long,
+	/** user's remember-me cookie token */
+	userRemembermeToken String maxlength(64),
+	/** user's failed login attemps */
+	userFailedLogins Boolean required,
+	/** unix timestamp of last failed login attempt */
+	userLastFailedLogin Integer,
+	userRegistrationDatetime Instant required,
+	userRegistrationIp String required maxlength(39),
+	companyId Integer required,
+	datacc Instant required,
+	datpas LocalDate
+}
+
+entity GazAdminConfig {
+	id Integer required,
+	adminid String required maxlength(20),
+	varDescri String required maxlength(100),
+	varName String required maxlength(100),
+	varValue String maxlength(255)
+}
+
+/** Tabella che tiene traccia di tutti i login effettuati dagli utenti, unito ai campi <last_modified> sulle varie tabelle e la tabella <gaz_menu_usage> servirà agli amministratori di sistema per controllare le attività degli utenti */
+entity GazAdminLoginHistory {
+	loginUserId Integer required,
+	loginDatetime Instant,
+	loginUserIp String maxlength(39)
+}
+
+entity GazAdminModule {
+	adminid String required maxlength(20),
+	companyId Integer required,
+	moduleid Integer required,
+	access Integer required
+}
+
+entity GazAnagra {
+	id Integer required,
+	ragso1 String required maxlength(50),
+	ragso2 String required maxlength(50),
+	sedleg String required maxlength(100),
+	legrapPfNome String required maxlength(60),
+	legrapPfCognome String required maxlength(60),
+	sexper String required maxlength(1),
+	datnas LocalDate,
+	luonas String required maxlength(50),
+	pronas String required maxlength(2),
+	counas String required maxlength(3),
+	indspe String required maxlength(50),
+	capspe String required maxlength(10),
+	citspe String required maxlength(50),
+	prospe String required maxlength(2),
+	country String required maxlength(3),
+	idCurrency Integer required,
+	idLanguage Integer required,
+	latitude BigDecimal required,
+	longitude BigDecimal required,
+	telefo String required maxlength(50),
+	fax String required maxlength(32),
+	cell String required maxlength(32),
+	codfis String required maxlength(16),
+	pariva String required maxlength(12),
+	feCodUnivoco String required maxlength(7),
+	eMail String required maxlength(50),
+	pecEmail String required maxlength(50),
+	fattEmail Boolean required,
+	/** identificativo stabilimento assegnato dal SIAN */
+	idSian Integer
+}
+
+entity GazAziend {
+	codice Integer required,
+	ragso1 String required maxlength(50),
+	ragso2 String required maxlength(50),
+	image Blob required,
+	sedleg String required maxlength(100),
+	legrapPfNome String required maxlength(60),
+	legrapPfCognome String required maxlength(60),
+	/** Fattura elettronica 1.2.4.1: Sigla della provincia dell'Ufficio del registro delle imprese presso il quale è registrata la società */
+	reaUfficio String required maxlength(2),
+	/** Fattura elettronica 1.2.4.2: Numero di iscrizione al registro delle imprese */
+	reaNumero String required maxlength(20),
+	/** Fattura elettronica 1.2.4.3: Nei soli casi di società di capitali (SpA, SApA, SRL), l'elemento informativo va valorizzato per indicare il capitale sociale */
+	reaCapitale BigDecimal,
+	/** Fattura elettronica 1.2.4.4: Nei casi di spa e srl, l'elemento informativo va valorizzato per indicare se vi è un socio unico oppure se vi sono più soci, valori ammessi [SU] socio unico e [SM] più soci */
+	reaSocio String required maxlength(2),
+	/** Fattura elettronica 1.2.4.5: Indica se la Società si trova in stato di liquidazione oppure no, valori ammessi [LS] in liquidazione [LN] non in liquidazione */
+	reaStato String required maxlength(2),
+	sexper String required maxlength(1),
+	datnas LocalDate,
+	/** Tipo produzione: agricola, industriale, professionale, artigianale, ricerca e sviluppo; viene usato nel modulo orderman (produzioni) */
+	orderType String required maxlength(3),
+	luonas String required maxlength(50),
+	pronas String required maxlength(2),
+	indspe String required maxlength(50),
+	capspe String required maxlength(10),
+	citspe String required maxlength(50),
+	prospe String required maxlength(2),
+	country String required maxlength(2),
+	idCurrency Integer required,
+	idLanguage Integer required,
+	telefo String required maxlength(50),
+	fax String required maxlength(32),
+	codfis String required maxlength(16),
+	pariva String maxlength(12),
+	pec String required maxlength(50),
+	eMail String required maxlength(50),
+	webUrl String required maxlength(255),
+	codAteco Integer required,
+	regime String required maxlength(1),
+	fiscalReg String required maxlength(4),
+	ammMin String required maxlength(20),
+	/** eventualmente con uno dei valori dell'elemento <TipoCassa> della fattura elettronica TC01,TC02,ecc */
+	faeTipoCassa String required maxlength(4),
+	/** scelta se applicare o meno la ritenuta d'acconto sulla cassa previdenziale */
+	raCassa Boolean,
+	/** Se a 1 si indica che si sta operando in  regime di “Iva per cassa ex art. 32 bis del D.p.r. 83/2012” */
+	vatSusp Boolean required,
+	decimalQuantity Integer required,
+	decimalPrice Integer required,
+	stockEvalMethod Integer required,
+	mascli Integer required,
+	masfor Integer required,
+	masban Integer required,
+	masFixedAssets Integer required,
+	masFoundAssets Integer required,
+	masCostAssets Integer required,
+	lostCostAssets Integer required,
+	superAmmAccount Integer required,
+	superAmmRate BigDecimal required,
+	minRateDeprec BigDecimal required,
+	capitalGainsAccount Integer required,
+	capitalLossAccount Integer required,
+	masStaff Integer required,
+	cassa Integer required,
+	ivaacq Integer required,
+	ivaven Integer required,
+	ivacor Integer required,
+	ivaera Integer required,
+	splitPayment Integer required,
+	impven Integer required,
+	imptra Integer required,
+	impimb Integer required,
+	impspe Integer required,
+	impvar Integer required,
+	/** Conto dei ricavi per bolli su vendite (il conto di costo su acquisti è la colonna taxstamp_account) */
+	boleff Integer required,
+	omaggi Integer required,
+	salesReturn Integer required,
+	impacq Integer required,
+	costTra Integer required,
+	costImb Integer required,
+	costVar Integer required,
+	purchasesReturn Integer required,
+	latitude BigDecimal required,
+	longitude BigDecimal required,
+	coriba Integer required,
+	cotrat Integer required,
+	cocamb Integer required,
+	/** conto ritenute subite */
+	cRitenute Integer required,
+	/** conto ritenute autonomi da versare  */
+	cRitenuteAutonomi Integer required,
+	cPayrollTax Integer required,
+	closingBalance Integer required,
+	economicResult Integer required,
+	operatingProfit Integer required,
+	operatingLosses Integer required,
+	openingBalance Integer required,
+	ritenuta BigDecimal required,
+	payrollTax BigDecimal required,
+	acciva BigDecimal,
+	taxstampLimit BigDecimal required,
+	taxstamp BigDecimal required,
+	perbol BigDecimal,
+	taxstampVat Integer required,
+	/** Conto di costo su acquisti per bolli ( quello di ricavo su vendite è sulla colonna boleff) */
+	taxstampAccount Integer required,
+	roundBol Boolean required,
+	virtualTaxstamp Boolean required,
+	virtualStampAuthProt String required maxlength(14),
+	virtualStampAuthDate LocalDate required,
+	causalePagam770 String required maxlength(1),
+	sperib BigDecimal,
+	desez1 String required maxlength(50),
+	desez2 String required maxlength(50),
+	desez3 String required maxlength(50),
+	desez4 String required maxlength(50),
+	desez5 String required maxlength(50),
+	desez6 String required maxlength(50),
+	desez7 String required maxlength(50),
+	desez8 String required maxlength(50),
+	desez9 String required maxlength(50),
+	reverseChargeSez Integer required,
+	fatimm String required maxlength(1),
+	artsea String required maxlength(1),
+	template String required maxlength(50),
+	colore String required maxlength(6),
+	conmag Integer required,
+	ivamT String required maxlength(1),
+	interessi BigDecimal required,
+	preeminentVat Integer required,
+	adminid String required maxlength(20),
+	lastModified Instant required
+}
+
+/** Tabella utilizzata sia per la personalizzazione della breadcrumb del menù (exec_mode=0) che per i widget della dashboard personalizzate dai singoli utenti (exec_mode=2) */
+entity GazBreadcrumb {
+	idBread Integer required,
+	/** Modo di visualizzazione/esecuzione dello script: 0=simple link (solo su breadcrumb),1=button link,2=frame window,3=background execution */
+	execMode Integer,
+	file String required maxlength(255),
+	titolo String required maxlength(255),
+	link String required maxlength(255),
+	positionOrder Integer,
+	icon Blob required,
+	adminid String required maxlength(20)
+}
+
+entity GazCampAvversita {
+	idAvv Integer required,
+	nomeAvv String required maxlength(30),
+	adminid String required maxlength(30),
+	lastModified Instant
+}
+
+entity GazCampColture {
+	idColt Integer required,
+	nomeColt String required maxlength(30),
+	adminid String required maxlength(30),
+	lastModified Instant
+}
+
+/** Viene utilizzato dal modulo Registro di campagna (camp) e serve per contenere la tabella del ministero della salute delle sostanze */
+entity GazCampFitofarmaci {
+	numeroRegistrazione Integer required,
+	prodotto String required maxlength(40),
+	impresa String required maxlength(30),
+	sedeLegaleImpresa String required maxlength(30),
+	scadenzaAutorizzazione String required maxlength(12),
+	indicazioniDiPericolo String required maxlength(45),
+	descrizioneFormulazione String required maxlength(30),
+	sostanzeAttive String required maxlength(30)
+}
+
+entity GazCampUsoFitofarmaci {
+	id Integer required,
+	codArt String required maxlength(15),
+	idColt Integer required,
+	idAvv Integer required,
+	dose BigDecimal required,
+	tempoSosp Integer required
+}
+
+entity GazClassroom {
+	id Integer required,
+	classe String required maxlength(16),
+	sezione String required maxlength(16),
+	annoScolastico Integer required,
+	teacher String required maxlength(50),
+	location String required maxlength(100),
+	titleNote String required maxlength(200)
+}
+
+entity GazConfig {
+	id Integer required,
+	description String maxlength(100),
+	variable String required maxlength(100),
+	cvalue String maxlength(100),
+	weight BigDecimal,
+	show Boolean,
+	lastModified Instant
+}
+
+entity GazCountry {
+	iso String required maxlength(2),
+	name String required maxlength(80),
+	iso3 String maxlength(3),
+	postalCodeLength Integer required,
+	ibanPrefix String required maxlength(2),
+	ibanLenght Integer required,
+	bankCodePos Boolean required,
+	bankCodeLenght Boolean required,
+	bankCodeFix Boolean required,
+	bankCodeAlpha Boolean required,
+	accountNumberPos Boolean required,
+	accountNumberLenght Boolean required,
+	accountNumberFix Boolean required,
+	accountNumberAlpha Boolean required,
+	vatNumberLenght Boolean required,
+	vatNumberAlpha Boolean required,
+	blackList Integer required,
+	istatContinent Integer required,
+	istatArea Integer required,
+	istatCountry Integer required,
+	codAgenziaEntrate Integer required,
+	istatName String required maxlength(100),
+	iana String required maxlength(4),
+	unVehicle String required maxlength(3)
+}
+
+entity GazCurrencies {
+	id Integer required,
+	currName String maxlength(50),
+	symbol String required maxlength(3),
+	htmlSymbol String required maxlength(10),
+	decimalPlace String maxlength(4),
+	decimalSymbol String maxlength(4),
+	thousandsSymbol String maxlength(4)
+}
+
+entity GazCurrencyHistory {
+	idCurrency Integer required,
+	changeValue BigDecimal required,
+	dateReference LocalDate required,
+	idCurrencyObj Integer required
+}
+
+entity GazDestina {
+	codice Integer required,
+	unitaLocale1 String required maxlength(50),
+	unitaLocale2 String required maxlength(50),
+	indspe String required maxlength(50),
+	capspe String required maxlength(10),
+	citspe String required maxlength(50),
+	prospe String required maxlength(2),
+	country String required maxlength(3),
+	latitude BigDecimal required,
+	longitude BigDecimal required,
+	telefo String required maxlength(50),
+	fax String required maxlength(32),
+	cell String required maxlength(32),
+	eMail String required maxlength(50),
+	feCodUfficio String required maxlength(7),
+	annota String required maxlength(50),
+	idAnagra Integer required
+}
+
+entity GazLanguages {
+	langId Integer required,
+	langCode String required maxlength(7),
+	title String required maxlength(50),
+	titleNative String required maxlength(50),
+	sef String required maxlength(50),
+	image String required maxlength(50),
+	description String required maxlength(512),
+	metakey String required maxlength(255),
+	metadesc String required maxlength(255),
+	published Integer required,
+	ordering Integer required
+}
+
+entity GazMenuModule {
+	id Integer required,
+	idModule Integer required,
+	link String required maxlength(100),
+	icon String required maxlength(50),
+	class String required maxlength(30),
+	translateKey Integer required,
+	accesskey String required maxlength(1),
+	weight Integer
+}
+
+entity GazMenuScript {
+	id Integer required,
+	idMenu Integer required,
+	link String required maxlength(100),
+	icon String required maxlength(50),
+	class String required maxlength(30),
+	translateKey Integer required,
+	accesskey String required maxlength(1),
+	weight Integer
+}
+
+entity GazMenuUsage {
+	adminid String required maxlength(30),
+	companyId Integer required,
+	translRef String required maxlength(64),
+	link String required maxlength(255),
+	click Integer,
+	color String required maxlength(6),
+	lastUse Instant required
+}
+
+entity GazModule {
+	id Integer required,
+	name String required maxlength(30),
+	link String required maxlength(100),
+	icon String required maxlength(50),
+	class String required maxlength(30),
+	access Integer,
+	weight Integer
+}
+
+entity GazMunicipalities {
+	id Integer required,
+	idProvince Integer required,
+	name String maxlength(255),
+	postalCode String maxlength(255),
+	dialingCode String maxlength(255),
+	statCode String maxlength(255),
+	codeRegister String maxlength(255),
+	webUrl String maxlength(255),
+	email String maxlength(255)
+}
+
+entity GazProvinces {
+	id Integer required,
+	idRegion Integer required,
+	name String maxlength(255),
+	statCode String maxlength(255),
+	abbreviation String maxlength(255),
+	webUrl String maxlength(255),
+	email String maxlength(255)
+}
+
+entity GazRegions {
+	id Integer required,
+	isoCountry String required maxlength(2),
+	name String maxlength(255),
+	capital String maxlength(255),
+	zone String maxlength(255),
+	statCode String maxlength(255),
+	abbreviation String maxlength(255),
+	webUrl String maxlength(255),
+	email String maxlength(255)
+}
+
+entity GazStaffAbsenceType {
+	idAbsence Integer required,
+	inpsRef String maxlength(3),
+	causal String maxlength(3),
+	descriExt String maxlength(256),
+	descri String maxlength(32)
+}
+
+entity GazStaffWorkType {
+	idWork Integer required,
+	idWorkType Integer required,
+	hourYearLimit Integer required,
+	hourMonthLimit Integer required,
+	hourWeekLimit BigDecimal required,
+	hourDayLimit BigDecimal required,
+	increase BigDecimal required,
+	descri String maxlength(255)
+}
+
+/** student data */
+entity GazStudents {
+	/** auto incrementing student_id of each student, unique index */
+	studentId Integer required,
+	/** classroom_id of student */
+	studentClassroomId Integer required,
+	/** student's first name */
+	studentFirstname String required maxlength(30),
+	/** student's last name */
+	studentLastname String required maxlength(30),
+	/** student's name, unique */
+	studentName String required maxlength(64),
+	/** student's password in salted and hashed format */
+	studentPasswordHash String required maxlength(255),
+	/** student's email, unique */
+	studentEmail String required maxlength(64),
+	/** student's telephone number */
+	studentTelephone String required maxlength(30),
+	/** student's activation status */
+	studentActive Boolean required,
+	/** student's email verification hash string */
+	studentActivationHash String maxlength(40),
+	/** student's password reset code */
+	studentPasswordResetHash String maxlength(40),
+	/** timestamp of the password reset request */
+	studentPasswordResetTimestamp Long,
+	/** student's remember-me cookie token */
+	studentRemembermeToken String maxlength(64),
+	/** student's failed login attemps */
+	studentFailedLogins Boolean required,
+	/** unix timestamp of last failed login attempt */
+	studentLastFailedLogin Integer,
+	studentRegistrationDatetime Instant required,
+	studentRegistrationIp String required maxlength(39)
+}
+
+
+
+// Relations
+
+
+// Options
+service * with serviceClass
+paginate * with pagination
+dto * with mapstruct
+filter *
+
